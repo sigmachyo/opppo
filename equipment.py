@@ -23,6 +23,10 @@ class OfficeEquipment(ABC):
     def description(self) -> str:
         """Возвращает строковое описание объекта."""
 
+    def __str__(self) -> str:
+        """Возвращает строковое представление объекта."""
+        return self.description()
+
     def matches(self, field: str, op: str, value: Any) -> bool:
         """Проверяет соответствие объекта условию."""
         actual = getattr(self, field, None)

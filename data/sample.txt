@@ -1,0 +1,8 @@
+ADD MOUSE type=laser buttons=6 price=2500 manufacturer="Logitech"
+ADD KEYBOARD type=membrane connector=USB price=7500 manufacturer="A4Tech"
+ADD MONITOR width=1920 height=1080 price=15000 manufacturer="LG"
+ADD MONITOR width=1920 height=1080 price=5000 manufacturer="LG"
+PRINT
+REM price <= 5000
+REM manufacturer == "LG"
+PRINT

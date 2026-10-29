@@ -1,0 +1,7 @@
+ADD MOUSE type=laser buttons=3 price=900 manufacturer="Old"
+ADD MOUSE type=laser buttons=5 price=1200 manufacturer="New"
+ADD KEYBOARD type=capacitive connector="USB Type-C" price=7000 manufacturer="Key Co"
+ADD MONITOR width=2560 height=1440 price=7000 manufacturer="LG"
+REM buttons >= 5
+REM manufacturer == "LG"
+PRINT

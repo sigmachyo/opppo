@@ -8,6 +8,7 @@ sys.stdout.reconfigure(encoding='utf-8') # кодировка вывода
 
 
 def process_file(filename: str) -> None:
+    """Построчно считывает файл команд и управляет объектами в контейнере."""
     container = Container()
     with open(filename, 'r', encoding='utf-8') as f:
         lines = f.readlines()
@@ -62,6 +63,7 @@ def process_file(filename: str) -> None:
 
 
 def main():
+    """Точка входа программы."""
     if len(sys.argv) < 2:
         print("Использование: python main.py <файл команд>", file=sys.stderr)
         sys.exit(2)

@@ -5,6 +5,8 @@ from typing import List, Any
 
 
 class OfficeEquipment(ABC):
+    """Базовый абстрактный класс оргтехники."""
+
     def __init__(self, price: int, manufacturer: str):
         if price < 0:
             raise ValueError("Цена не может быть отрицательной")
@@ -15,31 +17,29 @@ class OfficeEquipment(ABC):
 
     @abstractmethod
     def kind(self) -> str:
-        pass
+        """Возвращает строковый вид оргтехники."""
 
     @abstractmethod
     def description(self) -> str:
-        pass
+        """Возвращает строковое описание объекта."""
 
     def matches(self, field: str, op: str, value: Any) -> bool:
+        """Проверяет соответствие объекта условию."""
         actual = getattr(self, field, None)
         if actual is None:
             return False
         if isinstance(actual, (int, float)):
             try:
                 num = float(value)
-                if op == "==":
-                    return actual == num
-                if op == "!=":
-                    return actual != num
-                if op == "<":
-                    return actual < num
-                if op == "<=":
-                    return actual <= num
-                if op == ">":
-                    return actual > num
-                if op == ">=":
-                    return actual >= num
+                ops = {
+                    "==": actual == num,
+                    "!=": actual != num,
+                    "<": actual < num,
+                    "<=": actual <= num,
+                    ">": actual > num,
+                    ">=": actual >= num,
+                }
+                return ops.get(op, False)
             except (ValueError, TypeError):
                 return False
         elif isinstance(actual, str):
@@ -52,6 +52,8 @@ class OfficeEquipment(ABC):
 
 
 class Mouse(OfficeEquipment):
+    """Класс мыши с параметрами типа и числа кнопок."""
+
     def __init__(self, mouse_type: str, buttons: int, price: int, manufacturer: str):
         super().__init__(price, manufacturer)
         if mouse_type.lower() not in ("ball", "laser"):
@@ -72,6 +74,8 @@ class Mouse(OfficeEquipment):
 
 
 class Keyboard(OfficeEquipment):
+    """Класс клавиатуры с параметрами типа и разъема."""
+
     def __init__(self, keyboard_type: str, connector: str, price: int, manufacturer: str):
         super().__init__(price, manufacturer)
         self.type = keyboard_type.lower()
@@ -88,6 +92,8 @@ class Keyboard(OfficeEquipment):
 
 
 class Monitor(OfficeEquipment):
+    """Класс монитора с параметрами разрешения экрана."""
+
     def __init__(self, width: int, height: int, price: int, manufacturer: str):
         super().__init__(price, manufacturer)
         self.width = width
@@ -104,16 +110,21 @@ class Monitor(OfficeEquipment):
 
 
 class Container:
+    """Контейнер для хранения объектов оргтехники."""
+
     def __init__(self):
         self.items: List[OfficeEquipment] = []
 
     def add(self, item: OfficeEquipment) -> None:
+        """Добавляет объект в контейнер."""
         self.items.append(item)
 
     def print_all(self) -> List[str]:
+        """Возвращает строковые описания всех объектов."""
         return [item.description() for item in self.items]
 
     def remove_by_condition(self, condition: str) -> int:
+        """Удаляет объекты, подходящие под условие."""
         initial_len = len(self.items)
         remaining = []
         for item in self.items:

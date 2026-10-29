@@ -7,6 +7,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 
 def test_equipment():
+    """Тестирование создания и свойств объектов оргтехники."""
     m = Mouse("laser", 6, 2500, "Logitech")
     assert m.kind() == "mouse"
     assert m.price == 2500
@@ -22,6 +23,7 @@ def test_equipment():
 
 
 def test_container():
+    """Тестирование добавления и фильтрации объектов в контейнере."""
     c = Container()
     c.add(Mouse("laser", 6, 2500, "Logitech"))
     c.add(Keyboard("membrane", "USB", 3500, "A4Tech"))
@@ -34,6 +36,7 @@ def test_container():
 
 
 def run_tests():
+    """Запуск тестовых сценариев."""
     test_equipment()
     test_container()
     print("All tests passed!")

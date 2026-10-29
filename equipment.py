@@ -58,7 +58,8 @@ class OfficeEquipment(ABC):
 class Mouse(OfficeEquipment):
     """Класс мыши с параметрами типа и числа кнопок."""
 
-    def __init__(self, mouse_type: str, buttons: int, price: int, manufacturer: str):
+    def __init__(self, mouse_type: str, buttons: int,
+                 price: int, manufacturer: str):
         super().__init__(price, manufacturer)
         if mouse_type.lower() not in ("ball", "laser"):
             raise ValueError("Неизвестный тип мыши")
@@ -80,7 +81,8 @@ class Mouse(OfficeEquipment):
 class Keyboard(OfficeEquipment):
     """Класс клавиатуры с параметрами типа и разъема."""
 
-    def __init__(self, keyboard_type: str, connector: str, price: int, manufacturer: str):
+    def __init__(self, keyboard_type: str, connector: str,
+                 price: int, manufacturer: str):
         super().__init__(price, manufacturer)
         kb_type = keyboard_type.lower()
         if kb_type not in ("membrane", "dome", "capacitive"):

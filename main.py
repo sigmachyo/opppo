@@ -4,7 +4,7 @@ import sys
 import shlex
 from equipment import Mouse, Keyboard, Monitor, Container
 
-sys.stdout.reconfigure(encoding='utf-8') # кодировка вывода
+sys.stdout.reconfigure(encoding='utf-8')  # кодировка вывода
 
 
 def process_file(filename: str) -> None:

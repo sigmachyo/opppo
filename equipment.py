@@ -109,6 +109,38 @@ class Monitor(OfficeEquipment):
         )
 
 
+def _evaluate_condition(condition: str, context: dict) -> bool:
+    """Безопасно вычисляет условие вида 'field op value' без eval()."""
+    parts = condition.split()
+    if len(parts) != 3:
+        return False
+    field, op, val_str = parts[0], parts[1], parts[2].strip('"\'')
+    if field not in context:
+        return False
+    actual = context[field]
+
+    if isinstance(actual, (int, float)):
+        try:
+            num = float(val_str)
+            ops = {
+                "==": actual == num,
+                "!=": actual != num,
+                "<": actual < num,
+                "<=": actual <= num,
+                ">": actual > num,
+                ">=": actual >= num,
+            }
+            return ops.get(op, False)
+        except (ValueError, TypeError):
+            return False
+    elif isinstance(actual, str):
+        if op == "==":
+            return actual.lower() == val_str.lower()
+        if op == "!=":
+            return actual.lower() != val_str.lower()
+    return False
+
+
 class Container:
     """Контейнер для хранения объектов оргтехники."""
 
@@ -138,9 +170,9 @@ class Container:
                 "height": getattr(item, "height", 0)
             }
             try:
-                if not eval(condition, {}, context):
+                if not _evaluate_condition(condition, context):
                     remaining.append(item)
-            except Exception:
+            except (ValueError, KeyError, TypeError):
                 remaining.append(item)
         self.items = remaining
         return initial_len - len(self.items)

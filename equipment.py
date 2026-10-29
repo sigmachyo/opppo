@@ -82,7 +82,12 @@ class Keyboard(OfficeEquipment):
 
     def __init__(self, keyboard_type: str, connector: str, price: int, manufacturer: str):
         super().__init__(price, manufacturer)
-        self.type = keyboard_type.lower()
+        kb_type = keyboard_type.lower()
+        if kb_type not in ("membrane", "dome", "capacitive"):
+            raise ValueError("Неизвестный тип клавиатуры")
+        if not connector:
+            raise ValueError("Разъем не может быть пустым")
+        self.type = kb_type
         self.connector = connector
 
     def kind(self) -> str:
@@ -100,6 +105,8 @@ class Monitor(OfficeEquipment):
 
     def __init__(self, width: int, height: int, price: int, manufacturer: str):
         super().__init__(price, manufacturer)
+        if width < 1 or height < 1:
+            raise ValueError("Размеры монитора должны быть положительными")
         self.width = width
         self.height = height
 

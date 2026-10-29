@@ -1,5 +1,3 @@
-"""Модуль тестов для оргтехники и контейнера на базе pytest."""
-
 import sys
 import pytest
 from equipment import Mouse, Keyboard, Monitor, Container

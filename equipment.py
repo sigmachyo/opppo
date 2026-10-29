@@ -1,3 +1,5 @@
+"""Модуль иерархии классов оргтехники и контейнера."""
+
 from abc import ABC, abstractmethod
 from typing import List, Any
 

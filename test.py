@@ -1,3 +1,5 @@
+"""Модуль базовых тестов для оргтехники и контейнера."""
+
 import sys
 from equipment import Mouse, Keyboard, Monitor, Container
 

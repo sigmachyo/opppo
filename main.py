@@ -1,3 +1,5 @@
+"""Главный модуль для построчной обработки файла команд оргтехники."""
+
 import sys
 import shlex
 from equipment import Mouse, Keyboard, Monitor, Container

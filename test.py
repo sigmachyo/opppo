@@ -3,7 +3,8 @@
 import sys
 from equipment import Mouse, Keyboard, Monitor, Container
 
-sys.stdout.reconfigure(encoding='utf-8')
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
 
 
 def test_equipment():
